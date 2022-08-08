@@ -1,18 +1,25 @@
 import 'package:ecommerce_app/pages/category_page.dart';
 import 'package:ecommerce_app/pages/dashboard_page.dart';
+import 'package:ecommerce_app/pages/launcher_page.dart';
+import 'package:ecommerce_app/pages/login_page.dart';
 import 'package:ecommerce_app/pages/order_page.dart';
 import 'package:ecommerce_app/pages/product_page.dart';
 import 'package:ecommerce_app/pages/report_page.dart';
 import 'package:ecommerce_app/pages/settings_page.dart';
 import 'package:ecommerce_app/pages/user_page.dart';
+import 'package:ecommerce_app/providers/product_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (context) => ProductProvider()),
+  ],
+  child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -29,7 +36,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
 
-      initialRoute: DashboardPage.routeName,
+      initialRoute: LoginPage.routeName,
 
       routes: {
         DashboardPage.routeName: (_) => DashboardPage(),
@@ -39,6 +46,8 @@ class MyApp extends StatelessWidget {
         UserPage.routeName: (_) => UserPage(),
         SettingsPage.routeName: (_) => SettingsPage(),
         ReportPage.routeName: (_) => ReportPage(),
+        LoginPage.routeName: (_) => LoginPage(),
+        LauncherPage.routeName: (_) => LauncherPage(),
       },
 
     );

@@ -12,7 +12,6 @@ class DashboradItem {
   static const String user = 'Users';
   static const String settings = 'Settings';
   static const String report = 'Report';
-
 }
 
 final List<DashboradItem> dashboardItems = [
